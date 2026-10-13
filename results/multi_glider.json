@@ -1,0 +1,54 @@
+{
+  "case": "multi_glider",
+  "rho": 0.4,
+  "seeds": [
+    900,
+    914
+  ],
+  "fleets": {
+    "2": {
+      "reward_per_step": 19.190982175549248,
+      "episode_return": 55270.028665581835,
+      "time_in_range": 0.3494791666666667,
+      "least_served_in_range": 0.3416666666666667,
+      "true_error_pct": 1.6194634437561035,
+      "true_error_m": 323.8926696777344,
+      "ekf_std_m": 256.4599609375,
+      "lost": 2,
+      "episodes": 15
+    },
+    "3": {
+      "reward_per_step": 19.693676035379838,
+      "episode_return": 56717.786981893936,
+      "time_in_range": 0.5472222222222223,
+      "least_served_in_range": 0.33958333333333335,
+      "true_error_pct": 1.3567508459091187,
+      "true_error_m": 271.35015869140625,
+      "ekf_std_m": 196.6147918701172,
+      "lost": 1,
+      "episodes": 15
+    },
+    "4": {
+      "reward_per_step": 19.990721650869656,
+      "episode_return": 57573.27835450461,
+      "time_in_range": 0.5901909722222223,
+      "least_served_in_range": 0.32395833333333335,
+      "true_error_pct": 1.2355989217758179,
+      "true_error_m": 247.1197967529297,
+      "ekf_std_m": 182.40699768066406,
+      "lost": 4,
+      "episodes": 15
+    },
+    "5": {
+      "reward_per_step": 20.21924013778183,
+      "episode_return": 58231.411596811675,
+      "time_in_range": 0.6334027777777778,
+      "least_served_in_range": 0.32256944444444446,
+      "true_error_pct": 1.1378307342529297,
+      "true_error_m": 227.56613159179688,
+      "ekf_std_m": 176.34288024902344,
+      "lost": 1,
+      "episodes": 15
+    }
+  }
+}

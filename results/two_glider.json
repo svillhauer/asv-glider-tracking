@@ -1,0 +1,21 @@
+{
+  "case": "two_glider",
+  "rho": 0.4,
+  "seeds": [
+    900,
+    914
+  ],
+  "fleets": {
+    "2": {
+      "reward_per_step": 19.06736260570533,
+      "episode_return": 54914.00430443135,
+      "time_in_range": 0.34131944444444445,
+      "least_served_in_range": 0.3350694444444444,
+      "true_error_pct": 1.498504400253296,
+      "true_error_m": 299.70086669921875,
+      "ekf_std_m": 244.40579223632812,
+      "lost": 0,
+      "episodes": 15
+    }
+  }
+}
