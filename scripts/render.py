@@ -23,7 +23,7 @@ def main():
     ap.add_argument("--gliders", type=int, default=None, help="fleet size (multi_glider only)")
     ap.add_argument("--seed", type=int, default=77)
     ap.add_argument("--rho", type=float, default=0.4)
-    ap.add_argument("--every", type=int, default=16, help="env steps per frame")
+    ap.add_argument("--every", type=int, default=24, help="env steps per frame (24 = 2 h)")
     ap.add_argument("--out", type=Path, default=None)
     args = ap.parse_args()
 

@@ -12,7 +12,7 @@
 
 <img src="docs/media/two_glider.gif" width="100%" alt="ASV shuttling between two diving gliders"/>
 
-<sub>Two gliders 20 km apart, 8 km acoustic range. The ASV (square) can never hear both gliders at once, so it learns to shuttle between them. Shaded disk: horizontal reach of the acoustic link, which shrinks as the gliders dive. o: true glider, x: EKF estimate with 2σ ellipse, dotted line: range fix.</sub>
+<sub>Two gliders 20 km apart, 8 km acoustic range. The ASV (square) can never hear both gliders at once, so it learns to shuttle between them. Left, top-down: the shaded disk is the horizontal reach of the acoustic link, which shrinks as the gliders dive; o is the true glider, x its EKF estimate with a 2σ ellipse, and a dotted line a range fix. Right: the last two days in 3D, with the gliders' sawtooth dives below the ASV's surface track.</sub>
 
 </div>
 

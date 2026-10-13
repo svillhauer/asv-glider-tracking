@@ -1,11 +1,18 @@
 """Load a trained SAC policy together with its observation normalization."""
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import numpy as np
 
-MODELS_DIR = Path(__file__).resolve().parents[2] / "models"
+
+def default_models_dir() -> Path:
+    # $GLIDERTRACK_MODELS, else the repo's models/ (editable install), else ./models
+    if os.environ.get("GLIDERTRACK_MODELS"):
+        return Path(os.environ["GLIDERTRACK_MODELS"])
+    repo = Path(__file__).resolve().parents[2] / "models"
+    return repo if repo.is_dir() else Path.cwd() / "models"
 
 
 class Policy:
@@ -20,11 +27,11 @@ class Policy:
         self.epsilon = float(obs_norm["epsilon"])
 
     @classmethod
-    def load(cls, case: str, models_dir: Path | str = MODELS_DIR, device: str = "cpu") -> Policy:
+    def load(cls, case: str, models_dir: Path | str | None = None, device: str = "cpu") -> Policy:
         from gymnasium import spaces
         from stable_baselines3 import SAC
 
-        d = Path(models_dir) / case
+        d = Path(models_dir or default_models_dir()) / case
         with np.load(d / "obs_norm.npz") as f:
             obs_norm = {k: f[k] for k in f.files}
         # rebuild the spaces instead of unpickling them, so models load across numpy/gymnasium versions
