@@ -131,6 +131,10 @@ results/          fixed-seed evaluation of both models
 tests/            env, metrics, policy and training tests
 ```
 
+## Poster
+
+An earlier version of this work, a single two-glider policy with a 20-dimensional state, an 800 m acoustic range and 24-hour missions compared against a ping-pong baseline, was presented at the MIR 2026 Symposium: [poster (PDF)](docs/MIR_Symposium_2026_poster.pdf).
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
