@@ -89,6 +89,18 @@ Both policies are evaluated with deterministic actions on 15 fixed missions (see
 
 Regenerate these tables with `scripts/evaluate.py`; the raw numbers are in [`results/`](results).
 
+## Videos
+
+Full 240-hour missions, rendered with `glidertrack.video`: the ASV following the fleet over the current field, the gliders' dives with every acoustic contact, and each glider's true error against the EKF's reported uncertainty. Click a frame to open the video.
+
+| | |
+|:---:|:---:|
+| [<img src="docs/videos/reference_seed77.png" width="100%"/>](docs/videos/reference_seed77.mp4)<br/>**Reference mission.** Two gliders 20 km apart, 8 km acoustic range: the ASV shuttles between them. | [<img src="docs/videos/coverage_rho060_seed77.png" width="100%"/>](docs/videos/coverage_rho060_seed77.mp4)<br/>**Overlapping footprints.** The same policy at a 12 km range loiters between the gliders instead. |
+| [<img src="docs/videos/baselines_seed905.png" width="100%"/>](docs/videos/baselines_seed905.mp4)<br/>**Against the baselines.** One mission, four controllers: the Fisher-information orbit and MPC lose a glider, the learned policy does not. | [<img src="docs/videos/faulty_pings_0p2_seed905.png" width="100%"/>](docs/videos/faulty_pings_0p2_seed905.mp4)<br/>**Faulty pings.** With 0.2% of ranges corrupted, the filter accepts a bad fix and the ASV follows a drifting estimate. |
+| [<img src="docs/videos/multiglider_n5_seed900.png" width="100%"/>](docs/videos/multiglider_n5_seed900.mp4)<br/>**Five gliders.** The multi-glider policy spends most of its time in the middle of the line, where several gliders are in range. | |
+
+Regenerate the first, second and last with `python scripts/render_videos.py`.
+
 ## Quickstart
 
 ```bash
@@ -125,8 +137,11 @@ src/glidertrack/
   metrics.py      per-episode and summary metrics
   training.py     SAC recipe, episode-length curriculum, per-fleet-size evaluation
   animate.py      the GIFs above
-scripts/          evaluate.py, render.py, train.py
+  video.py        the mission videos (MP4)
+  assets/         ASV and glider icons
+scripts/          evaluate.py, render.py, render_videos.py, train.py
 models/           two_glider/ and multi_glider/ (policy.zip, obs_norm.npz)
+docs/videos/      mission videos and their preview frames
 results/          fixed-seed evaluation of both models
 tests/            env, metrics, policy and training tests
 ```
