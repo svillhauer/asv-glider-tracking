@@ -24,6 +24,8 @@ GLIDER_LIGHT = ["#8FC7F5", "#DBAEEA", "#9ED9B8", "#F7C58F", "#F08C9C"]
 ASV_COLOR = "navy"
 TRACK_BG, PANEL_BG = "#f0f4f8", "#FBFCFE"
 LOST_COLOR = "crimson"
+# small enough (under 1 MB at 960 x 540) for GitHub to preview
+_ENCODE = ["-pix_fmt", "yuv420p", "-preset", "slow", "-crf", "32", "-movflags", "+faststart"]
 STYLE = {
     "figure.facecolor": "white", "axes.facecolor": PANEL_BG, "axes.edgecolor": "#333333",
     "axes.labelcolor": "#222222", "axes.titleweight": "bold", "axes.labelweight": "bold", "axes.grid": True,
@@ -224,11 +226,10 @@ def render_mission(m: Mission, path: Path | str, title: str, subtitle: str = "",
             status.set_text(f"mean true error {mean_err:,.0f} m   |   in range: "
                             + " ".join(f"G{i + 1}" for i in range(n) if m.in_range[k, i]))
 
-        writer = FFMpegWriter(fps=fps, codec="libx264", bitrate=3000,
-                              extra_args=["-pix_fmt", "yuv420p", "-preset", "slow", "-crf", "23"])
+        writer = FFMpegWriter(fps=fps, codec="libx264", extra_args=_ENCODE)
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
-        with writer.saving(fig, str(path), dpi=100):
+        with writer.saving(fig, str(path), dpi=75):
             for k in range(0, len(m.asv), every):
                 draw(k)
                 writer.grab_frame()
@@ -279,11 +280,10 @@ def render_comparison(missions: dict[str, Mission], path: Path | str, title: str
                     eax.text(3, lost_m * 1.3, "lost", color=LOST_COLOR, fontsize=8)
             clock.set_text(f"t = {t[k]:5.1f} h")
 
-        writer = FFMpegWriter(fps=fps, codec="libx264", bitrate=3000,
-                              extra_args=["-pix_fmt", "yuv420p", "-preset", "slow", "-crf", "23"])
+        writer = FFMpegWriter(fps=fps, codec="libx264", extra_args=_ENCODE)
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
-        with writer.saving(fig, str(path), dpi=100):
+        with writer.saving(fig, str(path), dpi=75):
             for k in range(0, T, every):
                 draw(k)
                 writer.grab_frame()
