@@ -1,0 +1,6 @@
+,Reward per step,Time in acoustic range (%),Contacts received (% of glider-steps),Longest gap without contact (h),Median EKF uncertainty (m),Median true position error (m)
+900,16.959,24.667,24.667,2.917,179.016,340.565
+901,17.402,27.667,27.667,2.083,154.062,328.32
+902,17.093,29.333,29.333,3.083,173.011,393.594
+903,16.644,25.333,25.333,3.583,194.927,306.661
+904,18.173,40.0,40.0,2.083,131.315,302.718

@@ -8,3 +8,10 @@ __pycache__/
 .venv/
 .pytest_cache/
 .ruff_cache/
+
+# Gazebo workspace (built in the container) and recorded bags
+gazebo/vrx_ws/
+gazebo/ros_ws/build/
+gazebo/ros_ws/install/
+gazebo/ros_ws/log/
+gazebo/bags/

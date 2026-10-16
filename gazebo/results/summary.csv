@@ -1,0 +1,7 @@
+,Gym mean,Gym std,Gazebo mean,Gazebo std,Diff mean,Diff std,Diff % mean,Diff % min,Diff % max
+Reward per step,17.222,0.292,17.14,0.179,-0.082,0.177,-0.465,-1.685,1.05
+Time in acoustic range (%),29.267,2.938,29.333,3.308,0.067,0.596,,,
+Contacts received (% of glider-steps),26.067,3.031,25.667,3.317,-0.4,1.14,,,
+Longest gap without contact (h),2.3,0.326,2.217,0.225,-0.083,0.132,,,
+Median EKF uncertainty (m),166.444,13.579,169.229,11.049,2.785,5.619,,,
+Median true position error (m),507.909,62.366,470.194,125.628,-37.715,138.02,,,

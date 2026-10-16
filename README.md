@@ -24,6 +24,7 @@
 - **The reward is an information criterion, not a distance.** The agent maximizes −ln det of each glider's EKF position covariance (D-optimality), so the shuttling and loitering behaviors emerge from where the most informative ranges are, not from hand-written waypoints.
 - **One policy for any fleet size.** The multi-glider policy tracks 2 to 5 gliders spread over the same span with a single network, using fixed observation slots and a soft-minimum reward over the fleet.
 - **Scale-free by construction.** Everything is nondimensional (length = fleet span, speed = ASV top speed), so the same weights apply to a 2 km or a 20 km deployment.
+- **Transfers to a physics simulator unchanged.** In Gazebo with ROS 2, the same policy steers a VRX WAM-V through wind, waves and currents, tracking Slocum gliders that fly Project DAVE's glider model: reward per step changes by **−0.5%** and no glider is lost ([`gazebo/`](gazebo)).
 - **Reproducible:** both trained policies ship in `models/`, a fixed-seed evaluation regenerates `results/`, and a test pins the reference mission to its published return (53,410).
 
 ## The problem
@@ -89,6 +90,20 @@ Both policies are evaluated with deterministic actions on 15 fixed missions (see
 
 Regenerate these tables with `scripts/evaluate.py`; the raw numbers are in [`results/`](results).
 
+## Sim-to-sim transfer: Gazebo + ROS 2
+
+<p align="center"><img src="gazebo/media/vehicles.png" width="100%" alt="The VRX WAM-V and a Slocum glider in Gazebo"/></p>
+
+[`gazebo/`](gazebo) runs the two-glider policy, with no retraining, on the VRX WAM-V in Gazebo Harmonic through a ROS 2 bridge. The bridge subclasses the training environment instead of re-implementing it, so the EKF, observation and reward are the code the policy was trained on. On top of it are a C++ Gazebo plugin for ocean current on the hull, a port of Project DAVE's glider flight model, and realistic acoustic, ADCP and glider-navigation errors.
+
+| Five paired 12.5 h missions | Paired kinematic run | Gazebo | Gazebo − paired (95% CI) |
+|---|---|---|---|
+| Reward per step | 17.22 | 17.14 | −0.5% [−1.7%, +0.8%] |
+| Time in acoustic range | 29.3% | 29.3% | +0.1 pp [−0.7, +0.8] |
+| Median EKF uncertainty | 166 m | 169 m | +3 m [−4, +10] |
+
+See [`gazebo/README.md`](gazebo/README.md) for the architecture, the realism layers, the validation against the training environment, and how to run it in Docker.
+
 ## Videos
 
 Full 240-hour missions, rendered with `glidertrack.video`: the ASV following the fleet over the current field, the gliders' dives with every acoustic contact, and each glider's true error against the EKF's reported uncertainty. Each preview shows the first hours; click it for the full mission (MP4, under 1 MB).
@@ -144,6 +159,7 @@ models/           two_glider/ and multi_glider/ (policy.zip, obs_norm.npz)
 docs/videos/      mission videos and their preview frames
 results/          fixed-seed evaluation of both models
 tests/            env, metrics, policy and training tests
+gazebo/           sim-to-sim transfer: ROS 2 bridge, C++ Gazebo plugin, Docker, worlds, results
 ```
 
 ## Poster

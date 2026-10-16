@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.10.2)
+project(wamv_current)
+set(CMAKE_CXX_STANDARD 17)
+find_package(ament_cmake REQUIRED)
+find_package(gz-sim8 REQUIRED)
+find_package(gz-plugin2 REQUIRED COMPONENTS register)
+find_package(gz-transport13 REQUIRED)
+find_package(gz-msgs10 REQUIRED)
+find_package(gz-math7 REQUIRED)
+find_package(Eigen3 REQUIRED)
+
+add_library(WamvCurrentCorrection SHARED src/WamvCurrentCorrection.cc)
+target_include_directories(WamvCurrentCorrection PRIVATE ${EIGEN3_INCLUDE_DIR})
+target_link_libraries(WamvCurrentCorrection PRIVATE
+  gz-sim8::core gz-plugin2::register gz-transport13::core gz-msgs10::core gz-math7)
+install(TARGETS WamvCurrentCorrection LIBRARY DESTINATION lib)
+ament_package()
